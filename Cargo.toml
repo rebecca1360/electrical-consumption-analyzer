@@ -1,0 +1,20 @@
+[package]
+name = "electrical_consumtion_analyzer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# HTTP server framework
+axum = "0.6"
+# Async runtime
+tokio = { version = "1.0", features = ["full"] }
+# JSON serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# Environment variable handling
+dotenvy = "0.15"
+# For security (e.g., HTTPS support)
+hyper-tls = "0.5"
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
