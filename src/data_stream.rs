@@ -1,14 +1,22 @@
+use std::{collections::HashMap, sync::Arc};
+
 use chrono::Utc;
 use rand::{distributions::Uniform, Rng, SeedableRng};
 use rand_chacha::ChaCha12Rng;
 use serde_json::{json, Value};
-use tokio::time::{sleep, Duration};
+use tokio::{
+    sync::Mutex,
+    time::{sleep, Duration},
+};
 use tracing::{error, info};
 
-use crate::models::meter_reading::{MeterReading, MeterReadingError};
+use crate::models::{
+    consumer::{aggregate_data, ConsumerData},
+    meter_reading::{MeterReading, MeterReadingError},
+};
 
 // Data stream simulation
-pub async fn simulate_data_stream() {
+pub async fn simulate_data_stream(consumer_aggregation: Arc<Mutex<HashMap<String, ConsumerData>>>) {
     let meter_ids = vec!["MTR-001", "MTR-002", "MTR-003"];
     let consumer_ids = vec!["CNS-001", "CNS-002", "CNS-003"];
 
@@ -27,7 +35,10 @@ pub async fn simulate_data_stream() {
         };
 
         match parse_meter_reading(&reading) {
-            Ok(parsed) => info!("Successfully parsed reading: {:?}", parsed),
+            Ok(parsed) => {
+                info!("Successfully parsed reading: {:?}", parsed);
+                aggregate_data(consumer_aggregation.clone(), parsed).await;
+            }
             Err(err) => error!("Failed to parse reading: {}", err),
         }
 
