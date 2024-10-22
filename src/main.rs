@@ -4,6 +4,7 @@ use std::env;
 use std::net::SocketAddr;
 use tokio::task;
 mod data_stream;
+mod models;
 
 #[tokio::main]
 async fn main() {
