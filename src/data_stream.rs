@@ -18,7 +18,10 @@ use crate::models::{
 // Data stream simulation
 pub async fn simulate_data_stream(consumer_aggregation: Arc<Mutex<HashMap<String, ConsumerData>>>) {
     let meter_ids = vec!["MTR-001", "MTR-002", "MTR-003"];
-    let consumer_ids = vec!["CNS-001", "CNS-002", "CNS-003"];
+    let consumer_ids = vec![
+        "CNS-001", "CNS-002", "CNS-003", "CNS-004", "CNS-005", "CNS-006", "CNS-007", "CNS-008",
+        "CNS-009",
+    ];
 
     // Thread-safe RNG
     let mut rng = ChaCha12Rng::from_entropy();

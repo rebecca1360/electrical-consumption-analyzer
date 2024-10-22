@@ -5,6 +5,7 @@ The data we successfully parse is logged as info, and the corrupted data is logg
 
 The '/top-consumers' page shows the top consumer data.
 It does not support live rendering, so you need to refresh it to get the updated data.
+The consumers it shows are not from a recent time period as specified in the description, but from the time the server has been running.
 
 The other functionality is not implemented.
 

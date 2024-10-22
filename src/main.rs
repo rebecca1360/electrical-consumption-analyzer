@@ -69,7 +69,7 @@ pub async fn top_consumers_handler(
             .unwrap()
     });
 
-    // Collect top consumers (e.g., top 5)
+    // Collect top consumers 
     let top_consumers: Vec<String> = consumer_list
         .iter()
         .take(5)
