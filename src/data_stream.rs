@@ -42,8 +42,6 @@ pub async fn simulate_data_stream(consumer_aggregation: Arc<Mutex<HashMap<String
             Err(err) => error!("Failed to parse reading: {}", err),
         }
 
-        //TODO: handle duplicates
-
         // Sleep for a random interval to simulate irregular intervals
         let interval_ms = rng.sample(&interval_dist);
         sleep(Duration::from_millis(interval_ms)).await;
